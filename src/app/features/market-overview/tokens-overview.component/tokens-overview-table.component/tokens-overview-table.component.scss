@@ -1,0 +1,32 @@
+:host {
+  min-height: 300px;
+  
+  .loading-text {
+    text-align: center;
+    margin-top: 150px;
+    color: #666;
+  }
+
+  .spinner-container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }  
+
+  .token-logo {
+    width: 20px;
+  }
+
+  .symbol, .price, .day {
+    width: 150px;
+  }
+  
+  .logo {
+    width: 100px;
+  }
+
+  .week {
+    width: 200px;
+  }
+}

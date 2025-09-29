@@ -1,0 +1,15 @@
+<img class="logo" src="assets/images/token_tote_logo_trp.png" alt="" routerLink="/market" />
+<nav> 
+  <ul>
+    @for (item of menu; track item.label) {
+    <li>
+      <a routerLink="{{ item.link }}" 
+        routerLinkActive="active" 
+        [routerLinkActiveOptions]="{ exact: true }">
+        <img src="{{ item.icon }}" alt="" />
+        <span class="sr-only">{{ item.label }}</span>
+      </a>
+    </li>
+    }
+  </ul>
+</nav>

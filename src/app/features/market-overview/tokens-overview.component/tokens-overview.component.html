@@ -1,0 +1,11 @@
+<mat-chip-set aria-label="Overview selection">
+  @for (token of tokensOverview; track token.label) {
+    <mat-chip 
+      highlighted="{{ selectedComponent === token.component }}"
+      (click)="selectedComponent = token.component">
+      <img matChipAvatar src="{{ token.icon }}" alt="icon" />
+      {{ token.label }}
+    </mat-chip>
+  }
+</mat-chip-set>
+<ng-container [ngComponentOutlet]="selectedComponent"></ng-container>
