@@ -1,4 +1,8 @@
 :host {
   width: 100%;
   min-height: 500px;
+  
+  .mat-mdc-chip-set {
+    margin: 10px;
+  }
 }

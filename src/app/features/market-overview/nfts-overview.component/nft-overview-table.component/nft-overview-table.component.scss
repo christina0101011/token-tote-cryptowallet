@@ -1,0 +1,39 @@
+:host {
+  min-height: 300px;
+
+  .loading-text {
+    text-align: center;
+    margin-top: 150px;
+    color: #626161;
+  }
+
+  .spinner-container {
+    position: absolute;
+    top: 40%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .collection {
+    .token-logo {
+      width: 20px;
+    }
+
+    .logo {
+      margin: 3px 10px 3px 0;
+      border-radius: 10px;
+    }
+
+    .collection-link {
+      display: flex;
+      align-items: center;
+      text-decoration: none;
+      color: inherit;
+
+      &:hover {
+        cursor: pointer;
+        color: lighten(black, 50%);
+      }
+    }
+  }
+}
