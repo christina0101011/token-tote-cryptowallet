@@ -23,7 +23,8 @@ export class NFTOverviewTableComponent implements AfterViewInit {
   public tokensList = input.required<TopERC721Token[]| TrendingERC721Token[]>();
   public tableData = new MatTableDataSource<TopERC721Token | TrendingERC721Token>([]);
   public loading: boolean = true;
-  public displayedColumns: string[] = ['collection', 'market_cap_usd', 'floor_price', 'floor_price_usd', '1D_volume', '1D_cap'];
+  public displayedColumns = input.required<string[]>();
+  public contentType = input.required<string>();
   
   @ViewChild(MatSort) sort!: MatSort;
   @ViewChild(MatTable) matTable!: MatTable<any>;
@@ -48,8 +49,10 @@ export class NFTOverviewTableComponent implements AfterViewInit {
       switch (property) {
         case 'collection': return item.collection_title?.toLowerCase() ?? '';
         case 'market_cap_usd': return Number(item.market_cap_usd);
+        case 'rank': return Number(item.rank);
         case '1D_volume': return Number(item.volume_24hr_percent_change);
         case '1D_cap': return Number(item.market_cap_24hr_percent_change);
+        case 'volume_usd': return Number(item.volume_usd);
         case 'floor_price': return Number(item.floor_price);
         case 'floor_price_usd': return Number(item.floor_price_usd);
         default: return (item as any)[property];

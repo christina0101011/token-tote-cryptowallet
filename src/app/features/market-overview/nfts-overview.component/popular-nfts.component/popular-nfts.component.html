@@ -1,1 +1,6 @@
-<app-nft-overview-table [tokensList]="tokensList()"></app-nft-overview-table>
+<app-nft-overview-table 
+  [tokensList]="tokensList()"
+  [displayedColumns]="['collection', 'market_cap_usd', 'floor_price', 'floor_price_usd', '1D_volume', '1D_cap']"
+  [contentType]="'popular'"
+  >
+</app-nft-overview-table>

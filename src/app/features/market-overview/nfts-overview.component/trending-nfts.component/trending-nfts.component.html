@@ -1,1 +1,5 @@
-<p>trending-nfts.component works!</p>
+<app-nft-overview-table 
+  [tokensList]="tokensList()"
+  [displayedColumns]="['collection', 'rank', 'floor_price', 'floor_price_usd', '1D_volume', 'volume_usd']"
+  [contentType]="'trending'">
+</app-nft-overview-table>

@@ -20,15 +20,27 @@
       </td>
     </ng-container>
 
-    <!-- Market Cap Column -->
-    <ng-container matColumnDef="market_cap_usd">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        Market Cap
-      </th>
-      <td mat-cell *matCellDef="let token"> 
-        {{ token.market_cap_usd | currency:'USD':'symbol':'1.2-2' }} 
-      </td>
-    </ng-container>
+    @if(contentType() === 'trending') {
+      <!-- Rank Column -->
+      <ng-container matColumnDef="rank">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Rank
+        </th>
+        <td mat-cell *matCellDef="let token"> 
+          {{ token.rank }} 
+        </td>
+      </ng-container>
+    } @else if (contentType() === 'popular') {
+      <!-- Market Cap Column -->
+      <ng-container matColumnDef="market_cap_usd">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Market Cap
+        </th>
+        <td mat-cell *matCellDef="let token"> 
+          {{ token.market_cap_usd | currency:'USD':'symbol':'1.2-2' }} 
+        </td>
+      </ng-container>
+    }
 
     <!-- Floor Price Column -->
     <ng-container matColumnDef="floor_price">
@@ -58,16 +70,27 @@
       </td>
     </ng-container>
 
-    <!-- 1D Cap Change Column -->
-    <ng-container matColumnDef="1D_cap">
-      <th mat-header-cell *matHeaderCellDef mat-sort-header>
-        1D Cap Change
-      </th>
-      <td mat-cell *matCellDef="let token" class="day-cap"> 
-        {{ token.market_cap_24hr_percent_change | percent:'1.2-2' }} 
-    </ng-container>
-
-    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    @if(contentType() === 'trending') {
+      <!-- Volume Column -->
+      <ng-container matColumnDef="volume_usd">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          Volume
+        </th>
+        <td mat-cell *matCellDef="let token" class="day-cap"> 
+          {{ token.volume_usd | percent:'1.2-2' }} 
+      </ng-container>
+    } @else if(contentType() === 'popular') {
+      
+      <!-- 1D Cap Change Column -->
+      <ng-container matColumnDef="1D_cap">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>
+          1D Cap Change
+        </th>
+        <td mat-cell *matCellDef="let token" class="day-cap"> 
+          {{ token.market_cap_24hr_percent_change | percent:'1.2-2' }} 
+      </ng-container>
+    }
+    <tr mat-header-row *matHeaderRowDef="displayedColumns()"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns();"></tr>
   </table>
 }
