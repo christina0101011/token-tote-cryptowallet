@@ -1,7 +1,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AfterViewInit, Component, effect, inject, input, ViewChild } from '@angular/core';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TopERC721Token } from '@market-interfaces/top-erc721-tokens';
 import { TrendingERC721Token } from '@market-interfaces/trending-erc721-tokens';
@@ -22,19 +22,14 @@ export class NFTOverviewTableComponent implements AfterViewInit {
   private _liveAnnouncer = inject(LiveAnnouncer);
   public tokensList = input.required<TopERC721Token[]| TrendingERC721Token[]>();
   public tableData = new MatTableDataSource<TopERC721Token | TrendingERC721Token>([]);
-  public loading: boolean = true;
   public displayedColumns = input.required<string[]>();
   public contentType = input.required<string>();
   
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) matTable!: MatTable<any>;
 
   constructor() {
     effect(() => {
       this.tableData.data = this.tokensList();
-      if (this.tokensList().length) {
-        this.loading = false;
-      }
     });
   }
   
@@ -60,7 +55,6 @@ export class NFTOverviewTableComponent implements AfterViewInit {
     };
   }
 
-  /** Announce the change in sort state for assistive technology. */
   announceSortChange(sortState: Sort): void {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);

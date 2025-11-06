@@ -1,14 +1,14 @@
 import { Routes } from '@angular/router';
-import { WalletsComponent } from './features/accounts/decentralizad/wallets/wallets';
 import { MarketOverviewComponent } from './features/market-overview/market-overview.component';
 import { NftsOverviewComponent } from './features/market-overview/nfts-overview.component/nfts-overview.component';
 import { TokensOverviewComponent } from './features/market-overview/tokens-overview.component/tokens-overview.component';
 import { TaxHubComponent } from './features/tax-hub/tax-hub';
 import { PageNotFoundComponent } from './shared/page-not-found/page-not-found';
+import { DecentralizadComponent } from './features/accounts/decentralizad/decentralizad';
 
-export const routes: Routes = [
+export const routes: Routes = [ 
   { path: '', component: MarketOverviewComponent },
-  { path: 'accounts', component: WalletsComponent },
+  { path: 'accounts', component: DecentralizadComponent },
   { path: 'market', 
     component: MarketOverviewComponent,
     children: [

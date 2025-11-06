@@ -1,7 +1,7 @@
 import { LiveAnnouncer } from '@angular/cdk/a11y';
 import { AfterViewInit, Component, effect, inject, input, ViewChild } from '@angular/core';
 import { MatSort, MatSortModule, Sort } from '@angular/material/sort';
-import { MatTable, MatTableDataSource, MatTableModule } from '@angular/material/table';
+import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { Erc20Token } from '@market-interfaces/top-erc20-tokens';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
@@ -14,29 +14,23 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 })
 export class TokensOverviewTableComponent implements AfterViewInit {
   private _liveAnnouncer = inject(LiveAnnouncer);
-  public tableData = new MatTableDataSource<Erc20Token>([]);
-
+  public tableData = new MatTableDataSource<Erc20Token>();
   public tokensList = input.required<Erc20Token[]>();
-  public loading: boolean = true;
   public displayedColumns: string[] = ['symbol', 'logo', 'name', 'day', 'week', 'price'];
   
   @ViewChild(MatSort) sort!: MatSort;
-  @ViewChild(MatTable) matTable!: MatTable<any>;
 
   constructor() {
     effect(() => {
-      this.tableData.data = this.tokensList();; 
-      if (this.tokensList().length) {
-        this.loading = false;
-      }
+      this.tableData.data = this.tokensList();
     });
   }
-  
+    
   ngAfterViewInit(): void {
     this.tableData.sort = this.sort;
     this.setCustomSortAccessors();
   }
-
+  
   private setCustomSortAccessors(): void {
     this.tableData.sortingDataAccessor = (data: unknown, property: string): string | number => {
       const item = data as Erc20Token;
@@ -51,7 +45,6 @@ export class TokensOverviewTableComponent implements AfterViewInit {
     };
   }
 
-  /** Announce the change in sort state for assistive technology. */
   announceSortChange(sortState: Sort): void {
     if (sortState.direction) {
       this._liveAnnouncer.announce(`Sorted ${sortState.direction}ending`);

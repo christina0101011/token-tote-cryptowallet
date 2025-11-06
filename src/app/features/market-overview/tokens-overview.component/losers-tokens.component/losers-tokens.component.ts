@@ -12,7 +12,6 @@ import { TokensOverviewTableComponent } from '../tokens-overview-table.component
 export class LosersTokensComponent {
   private marketDataService = inject(MarketDataService);
   public tokensList = toSignal(this.marketDataService.losersERC20TokensList$, { initialValue: [] });
-  public loading = signal(true);
   
   constructor() {
     this.marketDataService.fetchLosersERC20Tokens();

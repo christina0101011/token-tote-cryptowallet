@@ -1,1 +1,15 @@
-<p>decentralizad works!</p>
+<section class="balance-section">
+  <h2>💰 Wallet Balance</h2>
+
+  @if (accountsService.isLoading()) {
+    <div>Loading balance...</div>
+  } @else if (accountsService.error()) {
+    <div class="error">{{ accountsService.error() }}</div>
+  } @else if (accountsService.balance()) {
+    <div class="balance-info">
+      <strong>Balance:</strong> {{ accountsService.balance().balance }}
+    </div>
+  } @else {
+    <div>No balance data yet.</div>
+  }
+</section>
